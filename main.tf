@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
     var.common_tags, 
     var.vpc_tags,
      {
-        Name = "${var.project_name}-${var.environment}"
+        Name = local.name
     }
   )
 
@@ -18,7 +18,7 @@ resource "aws_vpc" "main" {
     var.common_tags,
     var.igw_tags,
     {
-        Name = "${var.project_name}-${var.environment}"
+        Name = local.name
     }
 
   )
@@ -168,4 +168,14 @@ resource "aws_route_table_association" "database" {
   count = length(var.database_subnets_cidr)
   subnet_id = element(aws_subnet.database[*].id, count.index)
   route_table_id = aws_route_table.database_rt.id
+}
+
+
+resource "aws_db_subnet_group" "default" {
+  name       = "${local.name}"
+  subnet_ids = [aws_subnet.frontend.id, aws_subnet.backend.id]
+
+  tags = {
+    Name = "My DB subnet group"
+  }
 }
