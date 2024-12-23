@@ -171,11 +171,3 @@ resource "aws_route_table_association" "database" {
 }
 
 
-# resource "aws_db_subnet_group" "default" {
-#   name       = "${local.name}"
-#   subnet_ids = [aws_subnet.frontend.id, aws_subnet.backend.id]
-
-#   tags = {
-#     Name = "My DB subnet group"
-#   }
-# }
