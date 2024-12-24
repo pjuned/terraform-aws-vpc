@@ -39,7 +39,7 @@ variable "igw_tags" {
 }
 
 variable "public_subnets_cidr" {
-    type = list
+    type = list(any)
   validation {  
     condition     = length(var.public_subnets_cidr) == 2  
     error_message = "The list must contain exactly 2 items."  
@@ -52,7 +52,7 @@ variable "public_subnets_tags" {
 }
 
 variable "private_subnets_cidr" {
-    type = list
+    type = list(any)
   validation {  
     condition     = length(var.private_subnets_cidr) == 2  
     error_message = "The list must contain exactly 2 items."  
@@ -65,7 +65,7 @@ variable "private_subnets_tags" {
 }
 
 variable "database_subnets_cidr" {
-    type = list
+    type = list(any)
   validation {  
     condition     = length(var.database_subnets_cidr) == 2  
     error_message = "The list must contain exactly 2 items."  
