@@ -64,8 +64,6 @@ resource "aws_subnet" "database" {
   vpc_id     = aws_vpc.main.id
   cidr_block = var.database_subnets_cidr[count.index]
   availability_zone = local.az_names[count.index]
-
-
   tags = merge(
     var.common_tags,
     var.database_subnets_tags,
@@ -78,7 +76,7 @@ resource "aws_subnet" "database" {
 
   resource "aws_db_subnet_group" "example" {  
   name       = local.name 
-  subnet_ids = aws_subnet.database[*].id
+  subnet_ids = aws_subnet.database[0].id
   tags = {  
     Name = "${local.name}"  
   }  
